@@ -570,6 +570,16 @@ AppGroup.prototype = {
     let activePseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
     let focused = false;
 
+    each(this.groupState.metaWindows, function(metaWindow) {
+      if (getFocusState(metaWindow)) {
+        focused = true;
+      }
+    });
+
+    if (focused) {
+      this.actor.add_style_pseudo_class(focusPseudoClass);
+    }
+
     if (hoverPseudoClass !== focusPseudoClass || hoverPseudoClass !== activePseudoClass) {
       this.actor.remove_style_pseudo_class(hoverPseudoClass);
     }
