@@ -547,12 +547,14 @@ class AppGroup {
     each(this.groupState.metaWindows, function(metaWindow) {
       if (getFocusState(metaWindow)) {
         focused = true;
-        return false;
       }
     });
 
-    if (!focused
-      && (hoverPseudoClass !== focusPseudoClass || hoverPseudoClass !== activePseudoClass)) {
+    if (focused) {
+      this.actor.add_style_pseudo_class(focusPseudoClass);
+    }
+
+    if (hoverPseudoClass !== focusPseudoClass || hoverPseudoClass !== activePseudoClass) {
       this.actor.remove_style_pseudo_class(hoverPseudoClass);
     }
   }
